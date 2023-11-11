@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986710773376",
+    "project_id": "ugamarket-186cc",
+    "storage_bucket": "ugamarket-186cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986710773376:android:decb76fe44da9762d0e065",
+        "android_client_info": {
+          "package_name": "com.example.ugamarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2FHvBu7kpGbj_bxEePk9sFGJ5YFM_46M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
