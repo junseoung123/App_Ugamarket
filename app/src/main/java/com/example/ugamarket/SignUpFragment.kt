@@ -38,7 +38,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                 Toast.makeText(mainActivity, "입력 하세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 입력한 경우
-                doSignUp(email, password)
+                doSignUp(email, password)   // 회원 가입
             }
         }
     }
@@ -50,9 +50,23 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                 if (it.isSuccessful) {
                     println("회원가입 성공")
                     Toast.makeText(mainActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    doSignIn(userEmail, password)   // 회원가입 성공후 로그인
                 } else {
                     println("회원가입 실패")
                     Toast.makeText(mainActivity, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun doSignIn(userEmail: String, password: String) {
+        Firebase.auth.signInWithEmailAndPassword(userEmail, password)
+            .addOnCompleteListener() {
+                if (it.isSuccessful) {
+                    println("로그인 성공")
+                    Toast.makeText(mainActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                } else {
+                    println("로그인 실패")
+                    Toast.makeText(mainActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             }
     }
