@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         //ahntd 주석달기 테스트2
 
         val signInFragment = SignInFragment()
+        val signUpFragment = SignUpFragment()
     }
 
 
