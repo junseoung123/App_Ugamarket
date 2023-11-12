@@ -9,5 +9,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //ahntd 주석달기 테스트
         //ㅎㅇ
+        //ahntd 주석달기 테스트2
     }
 }
