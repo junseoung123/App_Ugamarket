@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostListActivity">
+
+    <RadioGroup
+        android:id="@+id/filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPost">
+
+        <RadioButton
+            android:id="@+id/radioButtonAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전체" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOnSale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="판매중" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="판매완료" />
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="391dp"
+        android:layout_height="573dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter" />
+
+    <Button
+        android:id="@+id/buttonPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="판매 글 등록"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonWatchMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="메시지 보기"
+        app:layout_constraintStart_toEndOf="@+id/buttonPost"
+        app:layout_constraintTop_toTopOf="@+id/buttonPost" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

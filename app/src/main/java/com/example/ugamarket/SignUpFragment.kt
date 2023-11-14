@@ -1,6 +1,7 @@
 package com.example.ugamarket
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -76,6 +78,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                 if (it.isSuccessful) {
                     println("로그인 성공")
                     Toast.makeText(mainActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    goToPostList(mainActivity) //로그인 성공 후 판매 글 보기로 넘어가기
                 } else {
                     println("로그인 실패")
                     Toast.makeText(mainActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
@@ -97,5 +100,10 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         }.addOnFailureListener {
             println("users 컬렉션에 추가 실패 함")
         }
+    }
+
+    private fun goToPostList(context: Context) {
+        val intent = Intent(context, PostListActivity::class.java)
+        startActivity(intent)
     }
 }

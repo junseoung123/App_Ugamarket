@@ -54,10 +54,16 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                 if (it.isSuccessful) {
                     println("로그인 성공")
                     Toast.makeText(mainActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    goToPostList(mainActivity) //로그인 성공 후 판매 글 보기로 넘어가기
                 } else {
                     println("로그인 실패")
                     Toast.makeText(mainActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun goToPostList(context: Context) {
+        val intent = Intent(context, PostListActivity::class.java)
+        startActivity(intent)
     }
 }
