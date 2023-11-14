@@ -38,23 +38,32 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             val name = editTextNameSignUp.text.toString()
             val birth = editTextBirthSignUp.text.toString()
 
+
             if (email.equals("") || password.equals("") || name.equals("") || birth.equals("")) { // 입력 안한 경우
                 Toast.makeText(mainActivity, "입력 하세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 입력한 경우
-                doSignUp(email, password)   // 회원 가입
-                // 데이터베이스 user 컬렉션에 데이터 추가
+                doSignUp(email, password, name, birth)   // 회원 가입
             }
         }
     }
 
 
-    private fun doSignUp(userEmail: String, password: String) {
+    private fun doSignUp(userEmail: String, password: String, name: String, birth: String) {
         Firebase.auth.createUserWithEmailAndPassword(userEmail, password)
             .addOnCompleteListener() {
                 if (it.isSuccessful) {
                     println("회원가입 성공")
+
+
                     Toast.makeText(mainActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+
+                    val uid = Firebase.auth.currentUser?.uid
+                    if (uid != null) {
+                        addUser(uid, userEmail, name, birth)
+                    }// 데이터베이스 user 컬렉션에 데이터 추가
+
+
                     doSignIn(userEmail, password)   // 회원가입 성공후 로그인
                 } else {
                     println("회원가입 실패")
@@ -76,10 +85,19 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             }
     }
 
-    private fun addUser(uid: String, userEmail: String, name: ParameterName, birth: String) {
+    private fun addUser(uid: String, userEmail: String, name: String, birth: String) {
         val db: FirebaseFirestore = Firebase.firestore
-        val usersCollectionRef=db.collection("users")
-
-        //usersCollectionRef.add(userMap).addOnSuccessListener {  }
+        val usersCollectionRef = db.collection("users")
+        val userMap = hashMapOf(
+            "uid" to uid,
+            "userEmail" to userEmail,
+            "name" to name,
+            "birth" to birth
+        )
+        usersCollectionRef.add(userMap).addOnSuccessListener {
+            println("users 컬렉션에 추가함")
+        }.addOnFailureListener {
+            println("users 컬렉션에 추가 실패 함")
+        }
     }
 }
