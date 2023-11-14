@@ -62,8 +62,6 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                     if (uid != null) {
                         addUser(uid, userEmail, name, birth)
                     }// 데이터베이스 user 컬렉션에 데이터 추가
-
-
                     doSignIn(userEmail, password)   // 회원가입 성공후 로그인
                 } else {
                     println("회원가입 실패")
