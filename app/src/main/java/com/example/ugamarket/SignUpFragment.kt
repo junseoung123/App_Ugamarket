@@ -24,6 +24,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         val editTextEmailSignUp = view.findViewById<EditText>(R.id.editTextEmailSignUp) //이메일 에딧 텍스트
         val editTextPasswordSignUp =
             view.findViewById<EditText>(R.id.editTextPasswordSignUp) // 비밀번호 에딧 텍스트
+        val editTextNameSignUp = view.findViewById<EditText>(R.id.editTextNameSignUp) // 이름 에딧 텍스트
         val editTextBirthSignUp =
             view.findViewById<EditText>(R.id.editTextBirthSignUp) // 생년월일 에딧 텍스트
         val buttonSignUp2 = view.findViewById<Button>(R.id.buttonSignUp2) // 회원가입 버튼
@@ -32,9 +33,10 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         buttonSignUp2.setOnClickListener {
             val email = editTextEmailSignUp.text.toString()
             val password = editTextPasswordSignUp.text.toString()
+            val name = editTextNameSignUp.text.toString()
             val birth = editTextBirthSignUp.text.toString()
 
-            if (email.equals("") || password.equals("") || birth.equals("")) { // 입력 안한 경우
+            if (email.equals("") || password.equals("") || name.equals("") || birth.equals("")) { // 입력 안한 경우
                 Toast.makeText(mainActivity, "입력 하세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 입력한 경우
