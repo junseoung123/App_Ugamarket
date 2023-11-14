@@ -90,7 +90,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         val usersCollectionRef = db.collection("users")
         val userMap = hashMapOf(
             "uid" to uid,
-            "userEmail" to userEmail,
+            "email" to userEmail,
             "name" to name,
             "birth" to birth
         )
