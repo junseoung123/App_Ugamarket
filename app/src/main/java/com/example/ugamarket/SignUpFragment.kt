@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     lateinit var mainActivity: MainActivity
@@ -41,6 +43,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             } else {
                 // 입력한 경우
                 doSignUp(email, password)   // 회원 가입
+                // 데이터베이스 user 컬렉션에 데이터 추가
             }
         }
     }
@@ -71,5 +74,12 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                     Toast.makeText(mainActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun addUser(uid: String, userEmail: String, name: ParameterName, birth: String) {
+        val db: FirebaseFirestore = Firebase.firestore
+        val usersCollectionRef=db.collection("users")
+
+        //usersCollectionRef.add(userMap).addOnSuccessListener {  }
     }
 }
