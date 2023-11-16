@@ -34,13 +34,6 @@
             android:text="판매완료" />
     </RadioGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="391dp"
-        android:layout_height="573dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filter" />
 
     <Button
         android:id="@+id/buttonPost"
@@ -60,5 +53,16 @@
         android:text="메시지 보기"
         app:layout_constraintStart_toEndOf="@+id/buttonPost"
         app:layout_constraintTop_toTopOf="@+id/buttonPost" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="391dp"
+        android:layout_height="573dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
