@@ -31,20 +31,23 @@ class PostListActivity : AppCompatActivity() {
 
         val radioGroupFilter = findViewById<RadioGroup>(R.id.filter)
         val radioButtonAll = findViewById<RadioButton>(R.id.radioButtonAll)
-        val radioButtonOnSale = findViewById<RadioButton>(R.id.radioButtonOnSale)
-        val radioButtonOnSold = findViewById<RadioButton>(R.id.radioButtonSold)
+        val radioButtonSale = findViewById<RadioButton>(R.id.radioButtonOnSale)
+        val radioButtonSold = findViewById<RadioButton>(R.id.radioButtonSold)
 
 
-        radioGroupFilter.check(radioButtonAll.id)   // 필터의 기본값은 전체
-        init()
-        radioGroupFilter.setOnCheckedChangeListener { radioGroup, checkid ->
-            when (checkid) {
-                radioButtonAll.id -> showAll() // 전체를 쿼리하여 보여주는 함수
-                radioButtonOnSale.id -> showOnSale()   // 판매중을 쿼리하여 보여주는 함수
-                radioButtonOnSold.id -> showSold()  // 판매완료를 쿼리하여 보여준는 함수
-            }
+        //init()
+        //radioGroupFilter.check(radioButtonAll.id)   // 필터의 기본값은 전체
+        radioButtonAll.setOnClickListener {
+            showAll()
         }
-        showAll()
+        radioButtonSale.setOnClickListener {
+            showOnSale()
+        }
+        radioButtonSold.setOnClickListener {
+            showSold()
+        }
+
+        //showAll()
         //getData();
     }
 
@@ -147,4 +150,15 @@ class PostListActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        val radioGroupFilter = findViewById<RadioGroup>(R.id.filter)
+        val radioButtonAll = findViewById<RadioButton>(R.id.radioButtonAll)
+        val radioButtonSale = findViewById<RadioButton>(R.id.radioButtonOnSale)
+        val radioButtonSold = findViewById<RadioButton>(R.id.radioButtonSold)
+        radioGroupFilter.check(radioButtonAll.id)
+        showAll()
+    }
+
 }

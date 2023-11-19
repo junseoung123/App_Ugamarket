@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
@@ -51,18 +53,24 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
         view.setOnClickListener {
             //Toast.makeText(view.context, "${postList.get(position).postId}", Toast.LENGTH_SHORT) .show()
 
-            val intent = Intent(view.context, EditPostActivity::class.java)
-            intent.putExtra("postId", postList.get(position).postId);
-            view.context.startActivity(intent) // 본인의 글일 경우
-
-
-            // 다른 사람 글일 경우
+            if (Firebase.auth.currentUser?.uid.equals(postList.get(position).uid)) {
+                // 본인의 글일 경우
+                val intent = Intent(view.context, EditPostActivity::class.java)
+                intent.putExtra("postId", postList.get(position).postId);
+                view.context.startActivity(intent)
+            } else {
+                // 다른 사람 글일 경우
+                val intent = Intent(view.context, ViewPostActivity::class.java)
+                intent.putExtra("postId", postList.get(position).postId);
+                view.context.startActivity(intent)
+            }
         }
     }
 
 
     fun addItem(data: PostListItem) {
         postList.add(data)
+        notifyDataSetChanged()
     }
 
     fun resetList() {
