@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
+
+    val postList = ArrayList<PostListItem>()    // 리사이클러뷰에 들어갈 게시물의 자료
+
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     }
@@ -20,7 +23,8 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return postList.size
+        //return 5
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,10 +32,22 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
         val titleText = view.findViewById<TextView>(R.id.textViewTitle)
         val saleOrNotText = view.findViewById<TextView>(R.id.textViewSaleOrNot)
         val priceText = view.findViewById<TextView>(R.id.textViewPrice)
+        /*
+                titleText.text = "제네시스 쿠페 완전 유사고 팝니다."
+                saleOrNotText.text = "판매중"
+                priceText.text = "8000000원"
 
-        titleText.text = "제네시스 쿠페 완전 유사고 팝니다."
-        saleOrNotText.text = "판매중"
-        priceText.text = "8000000원"
+         */
+        titleText.text = postList.get(position).title
+        if (postList.get(position).sold == true)
+            saleOrNotText.text = "판매중"
+        else
+            saleOrNotText.text = "판매완료"
+        priceText.text = "${postList.get(position).price}원"
+    }
+
+    fun addItem(data: PostListItem) {
+        postList.add(data)
     }
 
 }
