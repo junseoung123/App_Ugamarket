@@ -5,6 +5,7 @@
     android:background="@drawable/border_layout"
     android:orientation="vertical"
     android:layout_margin="5sp"
+    android:id="@+id/postListItem"
     >
 
     <TextView

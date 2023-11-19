@@ -1,9 +1,12 @@
 package com.example.ugamarket
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
@@ -44,13 +47,26 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
         else
             saleOrNotText.text = "판매중"
         priceText.text = "${postList.get(position).price}원"
+
+        view.setOnClickListener {
+            //Toast.makeText(view.context, "${postList.get(position).postId}", Toast.LENGTH_SHORT) .show()
+
+            val intent = Intent(view.context, EditPostActivity::class.java)
+            intent.putExtra("postId", postList.get(position).postId);
+            view.context.startActivity(intent) // 본인의 글일 경우
+
+
+            // 다른 사람 글일 경우
+        }
     }
+
 
     fun addItem(data: PostListItem) {
         postList.add(data)
     }
 
-    fun resetList(){
+    fun resetList() {
         postList.clear()
+        notifyDataSetChanged()
     }
 }
