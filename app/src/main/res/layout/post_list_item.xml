@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/border_layout"
+    android:orientation="vertical"
+    android:layout_margin="5sp"
+    >
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -10,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="판매 글 제목"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
