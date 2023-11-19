@@ -1,5 +1,6 @@
 package com.example.ugamarket
 
+import android.content.ClipData.Item
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RadioButton
@@ -7,6 +8,9 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 class PostListActivity : AppCompatActivity() {
     val adapter = PostListAdapter()
@@ -20,6 +24,8 @@ class PostListActivity : AppCompatActivity() {
         val radioButtonOnSold = findViewById<RadioButton>(R.id.radioButtonSold)
 
 
+        radioGroupFilter.check(radioButtonAll.id)   // 필터의 기본값은 전체
+        init()
         radioGroupFilter.setOnCheckedChangeListener { radioGroup, checkid ->
             when (checkid) {
                 radioButtonAll.id -> showAll() // 전체를 쿼리하여 보여주는 함수
@@ -27,17 +33,16 @@ class PostListActivity : AppCompatActivity() {
                 radioButtonOnSold.id -> showSold()  // 판매완료를 쿼리하여 보여준는 함수
             }
         }
-        radioGroupFilter.check(radioButtonAll.id)   // 필터의 기본값은 전체
-
-        init()
-        getData();
+        showAll()
+        //getData();
     }
 
-    private fun getData() {
+    private fun getData(data: PostListItem) {
         val postListItem = PostListItem()
-        adapter.addItem(postListItem)
+        adapter.addItem(data)
 
     }
+
 
     fun init() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
@@ -49,6 +54,29 @@ class PostListActivity : AppCompatActivity() {
 
     fun showAll() {
         println("전체를 쿼리하여 보여주는 함수")
+        adapter.resetList()
+        val db: FirebaseFirestore = Firebase.firestore
+        val postsCollectionRef = db.collection("posts")
+        postsCollectionRef.get().addOnSuccessListener {
+            val posts = mutableListOf<Item>()
+            for (doc in it) {
+                val postListItem = PostListItem()
+                val itemID = doc.id
+                postsCollectionRef.document(itemID).get().addOnSuccessListener {
+
+                    postListItem.postId = doc.id
+                    postListItem.uid = it["uid"].toString()
+                    postListItem.title = it["title"].toString()
+                    postListItem.sold = it["sold"] as Boolean
+                    postListItem.price = it["price"] as Number
+                    postListItem.content = it["content"].toString()
+
+                    getData(postListItem)
+                    init()
+                    println("쿼리해옴 : ${postListItem.title} ${it["sold"]}")
+                }
+            }
+        }
     }
 
     fun showOnSale() {

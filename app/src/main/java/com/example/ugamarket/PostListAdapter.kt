@@ -40,9 +40,9 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
          */
         titleText.text = postList.get(position).title
         if (postList.get(position).sold == true)
-            saleOrNotText.text = "판매중"
-        else
             saleOrNotText.text = "판매완료"
+        else
+            saleOrNotText.text = "판매중"
         priceText.text = "${postList.get(position).price}원"
     }
 
@@ -50,4 +50,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
         postList.add(data)
     }
 
+    fun resetList(){
+        postList.clear()
+    }
 }
