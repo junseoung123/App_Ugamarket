@@ -28,6 +28,13 @@ class PostListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // 메시지 보기 버튼
+        val buttonWatchMsg = findViewById<Button>(R.id.buttonWatchMessage)
+        buttonWatchMsg.setOnClickListener {
+            val intent = Intent(this, WatchMessageActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val radioGroupFilter = findViewById<RadioGroup>(R.id.filter)
         val radioButtonAll = findViewById<RadioButton>(R.id.radioButtonAll)
