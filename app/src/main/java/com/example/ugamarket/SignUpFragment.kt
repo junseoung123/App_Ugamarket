@@ -105,5 +105,6 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     private fun goToPostList(context: Context) {
         val intent = Intent(context, PostListActivity::class.java)
         startActivity(intent)
+        activity?.finish()
     }
 }

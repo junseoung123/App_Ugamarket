@@ -19,7 +19,7 @@ class EditPostActivity : AppCompatActivity() {
 
         val postId = intent.getStringExtra("postId")
 
-        val textViewTitle = findViewById<TextView>(R.id.textViewTitle)
+        val textViewTitle = findViewById<TextView>(R.id.textViewMsg)
         val textViewName = findViewById<TextView>(R.id.textViewName)
         val editTextPrice = findViewById<EditText>(R.id.editTextPrice)
         val radioGropSaleState = findViewById<RadioGroup>(R.id.radioGroupSaleState)

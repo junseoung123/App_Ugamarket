@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -34,7 +32,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
-        val titleText = view.findViewById<TextView>(R.id.textViewTitle)
+        val titleText = view.findViewById<TextView>(R.id.textViewMsg)
         val saleOrNotText = view.findViewById<TextView>(R.id.textViewSaleOrNot)
         val priceText = view.findViewById<TextView>(R.id.textViewPrice)
         /*

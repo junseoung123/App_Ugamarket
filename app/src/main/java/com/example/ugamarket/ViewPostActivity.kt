@@ -1,6 +1,5 @@
 package com.example.ugamarket
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -20,7 +19,7 @@ class ViewPostActivity : AppCompatActivity() {
 
         val postId = intent.getStringExtra("postId")
 
-        val textViewTitle = findViewById<TextView>(R.id.textViewTitle)
+        val textViewTitle = findViewById<TextView>(R.id.textViewMsg)
         val textViewContent = findViewById<TextView>(R.id.textViewContent)
         val textViewPrice = findViewById<TextView>(R.id.textViewPrice)
         val textViewState = findViewById<TextView>(R.id.textViewSaleState)

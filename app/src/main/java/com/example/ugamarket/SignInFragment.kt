@@ -65,5 +65,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun goToPostList(context: Context) {
         val intent = Intent(context, PostListActivity::class.java)
         startActivity(intent)
+        activity?.finish()
     }
 }
