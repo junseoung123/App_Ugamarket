@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
@@ -28,7 +29,9 @@ class ViewPostActivity : AppCompatActivity() {
         val db: FirebaseFirestore = Firebase.firestore
         val itemsCollectionRef = db.collection("posts")
         val usersCollectionRef = db.collection("users")
+        val messagesCollectionRef = db.collection("messages")
         val documentRef = itemsCollectionRef.document(postId.toString())
+        var uid = "" //판매자의 uid
         documentRef.get().addOnSuccessListener {
             textViewTitle.text = it["title"].toString()
             textViewContent.text = it["content"].toString()
@@ -40,7 +43,7 @@ class ViewPostActivity : AppCompatActivity() {
 
             textViewContent.text = it["content"].toString()
 
-            val uid = it["uid"].toString()
+            uid = it["uid"].toString()
             var name = ""
             //val user =
             usersCollectionRef.whereEqualTo("uid", uid).get().addOnSuccessListener {
@@ -54,7 +57,27 @@ class ViewPostActivity : AppCompatActivity() {
         val buttonSendMsg = findViewById<Button>(R.id.buttonSendMsg)
         buttonSendMsg.setOnClickListener {
             //판매자에게 메시지 보내기
+            val sendMsgDialog = AlertDialog.Builder(this)
+            sendMsgDialog.setTitle("판매자에게 메시지 보내기")
+            val et: EditText = EditText(this)
+            sendMsgDialog.setView(et)
 
+            sendMsgDialog.setPositiveButton("전송") { dialog, _ ->
+                var msg: String = et.text.toString() // 보낼 메시지 내용
+                val itemMap = hashMapOf(
+                    "content" to msg,
+                    "receiver_uid" to uid
+                )
+                //데이터 베이스 messages에 추가할 부분
+                messagesCollectionRef.add(itemMap).addOnSuccessListener {
+                    Toast.makeText(this, "메시지 전송됨", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener{
+                    Toast.makeText(this, "메시지 전송 실패", Toast.LENGTH_SHORT).show()
+                }
+
+                dialog.dismiss()
+            }
+            sendMsgDialog.show()
         }
     }
 }
